@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2 - Consume API</title>
+  <script>
+    const completed = (e) => {
+      document.getElementById('result').innerHTML = e.target.responseText;
+    };
+
+    const error = (e) => console.log(e.target.responseText);
+
+    function getHelloWorld() {
+      const ajaxRequest = new XMLHttpRequest();
+      ajaxRequest.addEventListener("load", completed);
+      ajaxRequest.addEventListener("error", error);
+      ajaxRequest.open("GET", "http://localhost:3000/hello");
+      ajaxRequest.send();
+    }
+  </script>
+
+  <style>
+  .nav-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.3s;
+  }
+
+  .nav-button:hover {
+      background-color: #45a049;
+  }
+  </style>
+</head>
+
+<body>
+  <button onclick="getHelloWorld();">Hello</button>
+  <h3>Results:</h3>
+  <div id="result"></div>
+
+  <!-- Button to navigate to another page -->
+  <a href="create_teacher.html" class="nav-button">Create Teachers</a>
+
+  <a href="list_of_teachers.html" class="nav-button">Show a list of teachers</a>
+</body>
+
+</html>

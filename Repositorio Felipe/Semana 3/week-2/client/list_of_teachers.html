@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Teachers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .loading {
+            text-align: center;
+            color: #999;
+        }
+
+        .error-message {
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>List of Teachers</h2>
+        <div class="loading" id="loadingMessage">Loading...</div>
+        <div class="error-message" id="errorMessage" style="display: none;">Failed to load teachers.</div>
+        <table id="teachersTable" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                </tr>
+            </thead>
+            <tbody id="teachersList">
+                <!-- Teachers will be dynamically populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingMessage = document.getElementById('loadingMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const teachersTable = document.getElementById('teachersTable');
+            const teachersList = document.getElementById('teachersList');
+
+            fetch('https://api.example.com/teachers')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch teachers');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    loadingMessage.style.display = 'none';
+                    teachersTable.style.display = 'table';
+                    
+                    data.forEach(teacher => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${teacher.name}</td>
+                            <td>${teacher.email}</td>
+                            <td>${teacher.subject}</td>
+                        `;
+                        teachersList.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    loadingMessage.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                });
+        });
+    </script>
+
+</body>
+</html>

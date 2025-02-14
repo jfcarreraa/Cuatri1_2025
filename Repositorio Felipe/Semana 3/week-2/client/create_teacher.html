@@ -80,12 +80,12 @@
                 <input type="text" id="name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" required>
+                <label for="lastname">Lastname:</label>
+                <input type="text" id="lastname" required>
             </div>
             <div class="form-group">
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
             </div>
             <div class="form-group">
                 <button type="submit">Create Teacher</button>
@@ -104,18 +104,19 @@
             event.preventDefault();
 
             const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
+            const lastname = document.getElementById('lastname').value;
+            const username = document.getElementById('username').value;
 
-            fetch('https://api.example.com/teachers', {
+            //fetch('https://api.example.com/teachers', {
+            fetch('../server/teacherController', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     name: name,
-                    email: email,
-                    subject: subject
+                    lastname: lastname,
+                    username: username
                 })
             })
             .then(response => {

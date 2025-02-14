@@ -74,8 +74,8 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Email</th>
-                    <th>Subject</th>
+                    <th>Lastname</th>
+                    <th>Username</th>
                 </tr>
             </thead>
             <tbody id="teachersList">
@@ -106,8 +106,8 @@
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>${teacher.name}</td>
-                            <td>${teacher.email}</td>
-                            <td>${teacher.subject}</td>
+                            <td>${teacher.lastname}</td>
+                            <td>${teacher.username}</td>
                         `;
                         teachersList.appendChild(row);
                     });

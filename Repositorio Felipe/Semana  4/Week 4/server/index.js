@@ -8,6 +8,7 @@ const {
   taskPatch,
   taskPost,
   taskGet,
+  taskDelete
 } = require("./controllers/taskController.js");
 
 const {
@@ -34,11 +35,13 @@ app.get("/api/tasks", taskGet);
 app.post("/api/tasks", taskPost);
 app.patch("/api/tasks", taskPatch);
 app.put("/api/tasks", taskPatch);
+app.delete("/api/tasks", taskDelete);
 
 app.get("/api/teacher", teacherGet);
 app.post("/api/teacher", teacherPost);
 app.patch("/api/teacher", teacherPatch);
 app.put("/api/teacher", teacherPatch);
 app.delete("/api/teacher", teacherDelete);
+
 
 app.listen(3000, () => console.log(`Example app listening on port 3000!`))
